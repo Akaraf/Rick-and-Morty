@@ -25,6 +25,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             style="@style/AllMargin16"
-            android:textSize="24sp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

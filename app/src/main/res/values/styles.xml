@@ -4,6 +4,10 @@
     <item name="android:layout_marginRight">16dp</item>
     <item name="android:layout_marginLeft">16dp</item>
     </style>
+    <style name="StartEndMargin8">
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
     <style name="AllMargin8">
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginEnd">8dp</item>

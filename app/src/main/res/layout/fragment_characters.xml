@@ -16,5 +16,5 @@
         android:id="@+id/characters_r_v"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AllMargin8"/>
+        style="@style/StartEndMargin16"/>
 </LinearLayout>
