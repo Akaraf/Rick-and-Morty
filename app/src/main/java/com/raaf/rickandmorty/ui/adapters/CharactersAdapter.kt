@@ -24,6 +24,11 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
 //  This variable contains value of the saved position obtained from SavedStateHandle
     private var savedPosition: Int? = null
 
+    companion object {
+        const val LOADING_ITEM = 0
+        const val CHARACTER_ITEM = 1
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder =
         CharactersViewHolder(LayoutInflater
             .from(parent.context)
@@ -38,6 +43,11 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
             .error(ColorDrawable(Color.GRAY))
             .into(holder.characterImage)
         holder.characterName.text = character.name
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == itemCount) CHARACTER_ITEM
+            else LOADING_ITEM
     }
 
     //    Restores scrolling after killing process app

@@ -66,11 +66,7 @@ class CharactersFragment : Fragment(), View.OnClickListener {
         setCharactersJob()
 //        Processing states of data in recycler
 //        We can wrap recycler in SwipeRefreshLayout instead of using loader state adapters
-        charactersRV.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
-            CharactersLoadStateAdapter { charactersAdapter.retry() },
-            CharactersLoadStateAdapter { charactersAdapter.retry() }
-        )
-
+        addLoadStateAdapters()
         charactersAdapter.addLoadStateListener {
             if (it.refresh == LoadState.Loading && charactersAdapter.itemCount == 0) {
                 charactersRV.visibility = View.GONE
@@ -100,6 +96,21 @@ class CharactersFragment : Fragment(), View.OnClickListener {
         when (view) {
             retryButton -> {
                 charactersAdapter.retry()
+            }
+        }
+    }
+
+    private fun addLoadStateAdapters() {
+        var headerStateAdapter = CharactersLoadStateAdapter { charactersAdapter.retry() }
+        var footerStateAdapter = CharactersLoadStateAdapter { charactersAdapter.retry() }
+            charactersRV.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
+                headerStateAdapter,
+                footerStateAdapter
+            )
+        characterLM.spanSizeLookup =  object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (charactersAdapter.getItemViewType(position) == 0) 1
+                    else 2
             }
         }
     }
