@@ -25,22 +25,22 @@
 
             <TextView
                 android:id="@+id/detail_character_name_t_v"
-                android:layout_width="match_parent"
-                android:textSize="24sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginTop="32dp"
                 style="@style/StartEndMargin16"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/character_detail_i_v" />
 
             <TextView
                 android:id="@+id/species_t_v"
-                android:layout_marginStart="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:textSize="16sp"
                 android:textStyle="bold"

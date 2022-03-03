@@ -13,8 +13,8 @@ import com.raaf.rickandmorty.R
 
 //wrapper for displaying the status of loading list content and error handling
 
-class CharactersLoaderStateAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<CharactersLoaderStateAdapter.LoaderViewHolder>() {
+class LoaderStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoaderStateAdapter.LoaderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoaderViewHolder =
         LoaderViewHolder(LayoutInflater.from(parent.context)

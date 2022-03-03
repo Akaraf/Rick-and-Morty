@@ -9,7 +9,9 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
@@ -17,9 +19,10 @@ import com.raaf.rickandmorty.App
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.dataModels.Character
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
+import com.raaf.rickandmorty.ui.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.CharacterDetailViewModel
 
-class CharacterDetailFragment : Fragment() {
+class CharacterDetailFragment : Fragment(), View.OnClickListener {
 
     private lateinit var characterIV: ShapeableImageView
     private lateinit var characterNameTV: TextView
@@ -54,6 +57,7 @@ class CharacterDetailFragment : Fragment() {
         status = view.findViewById(R.id.status_t_v)
         characterLocation = view.findViewById(R.id.location_t_v)
         openEpisodesFAB = view.findViewById(R.id.open_episodes)
+        openEpisodesFAB.setOnClickListener(this)
         return view
     }
 
@@ -62,8 +66,31 @@ class CharacterDetailFragment : Fragment() {
         fillUI(characterDetailVM.character)
     }
 
+    override fun onResume() {
+        super.onResume()
+        characterDetailVM.character?.let {
+            setToolbarTitle(
+                requireActivity().findViewById(R.id.toolbar),
+                it.name)
+        }
+    }
+
+    override fun onClick(view: View) {
+        when (view) {
+            openEpisodesFAB -> {
+                findNavController().navigate(
+                    R.id.action_characterDetailFragment_to_episodesFragment,
+                    characterDetailVM.getEpisodesBundle())
+            }
+        }
+    }
+
     private fun fillUI(character: Character?) {
-        if (character == null) return
+        if (character == null) {
+            Toast.makeText(requireContext(), getString(R.string.no_data), Toast.LENGTH_LONG).show()
+            findNavController().popBackStack()
+            return
+        }
         Glide.with(requireContext())
             .load(character.image)
             .error(ColorDrawable(Color.GRAY))

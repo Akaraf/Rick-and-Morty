@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AllMargin8"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/light_gray"
-    app:cardPreventCornerOverlap="true"
-    style="@style/AllMargin8"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,15 +16,15 @@
         <ImageView
             android:id="@+id/character_i_v"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/character_name_t_v"
+            style="@style/AllMargin16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            style="@style/AllMargin16"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

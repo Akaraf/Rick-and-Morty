@@ -15,6 +15,12 @@ interface ApiService {
     @GET("character/")
     suspend fun getCharacters(@Query("page") page: Int) : CharactersResponse
 
+    @GET("episode/{ids}")
+    suspend fun getEpisodesById(@Path("ids") ids: String) : List<Episode>
+
+    @GET("episode/{id}")
+    suspend fun getEpisodeById(@Path("id") id: String) : Episode
+
     companion object {
         private const val BASE_URL = "https://rickandmortyapi.com/api/"
 

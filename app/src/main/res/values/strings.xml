@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
+    <string name="characters">Characters</string>
     <string name="error_message">Something went wrong. Please try again.</string>
     <string name="retry">Retry</string>
     <string name="location">Location:</string>
     <string name="open_episodes">Open episodes</string>
+    <string name="no_data">This data is not available yet.</string>
+    <string name="episodes">Episodes</string>
 </resources>

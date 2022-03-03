@@ -18,22 +18,6 @@ class CharactersViewModel @AssistedInject constructor(
     @Assisted val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    companion object {
-        private const val PAGING_STATE = "saved offset"
-    }
-
-    var savedPosition: Int? = null
-    private set
-    get() {
-        val fieldVal = field
-        field = null
-        return fieldVal
-    }
-
-    init {
-        setSavedOffset()
-    }
-
     private val pagerConfig = PagingConfig(
         pageSize = Paging.PAGE_SIZE,
         initialLoadSize = Paging.INITIAL_LOAD_SIZE,
@@ -43,18 +27,8 @@ class CharactersViewModel @AssistedInject constructor(
         pagingSource
     }.flow.cachedIn(viewModelScope)
 
-    private fun setSavedOffset() {
-        val offset = savedStateHandle.get<Int?>(PAGING_STATE)
-        pagingSource.savedPage = offset?.div(Paging.PAGE_SIZE)
-        savedPosition = offset?.rem(Paging.PAGE_SIZE)
-    }
-
-    fun saveOffset(currentPosition: Int?) {
-        savedStateHandle.set(PAGING_STATE, currentPosition)
-    }
-
     @AssistedFactory
     interface Factory {
-        fun create(savedStateHandle: SavedStateHandle) : CharactersViewModel
+        fun create(savedStateHandle: SavedStateHandle): CharactersViewModel
     }
 }

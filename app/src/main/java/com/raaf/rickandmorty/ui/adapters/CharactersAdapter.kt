@@ -3,7 +3,6 @@ package com.raaf.rickandmorty.ui.adapters
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +18,8 @@ import com.raaf.rickandmorty.Character.EXTRA_CHARACTER
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.dataModels.Character
 
-class CharactersAdapter(private val layoutManager: GridLayoutManager,
-                        private val reviewRV: RecyclerView): PagingDataAdapter<Character,
+class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDataAdapter<Character,
         CharactersAdapter.CharactersViewHolder>(ReviewDiffItemCallback) {
-
-//  This variable contains value of the saved position obtained from SavedStateHandle
-    private var savedPosition: Int? = null
 
     companion object {
         const val LOADING_ITEM = 0
@@ -37,7 +32,6 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
             .inflate(R.layout.card_character, parent, false))
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        if(position == 0) scrollToSavedPosition()
         var character = getItem(position)
         if (character == null) return
         Glide.with(holder.itemView)
@@ -46,6 +40,7 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
             .into(holder.characterImage)
         holder.characterName.text = character.name
         holder.character = character
+        holder.layoutManager = layoutManager
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -53,21 +48,10 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
             else LOADING_ITEM
     }
 
-    //    Restores scrolling after killing process app
-    private fun scrollToSavedPosition() {
-        if (savedPosition != null) {
-            layoutManager.smoothScrollToPosition(reviewRV, null, savedPosition!!)
-            savedPosition = null
-        }
-    }
-//
-    fun setSavedPosition(position: Int) {
-        savedPosition = position
-    }
-
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
+        var layoutManager: GridLayoutManager? = null
         var character: Character? = null
         var characterImage: ImageView = itemView.findViewById(R.id.character_i_v)
         var characterName: TextView = itemView.findViewById(R.id.character_name_t_v)
