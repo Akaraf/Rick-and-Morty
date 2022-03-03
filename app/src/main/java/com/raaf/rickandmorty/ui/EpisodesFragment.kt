@@ -3,6 +3,8 @@ package com.raaf.rickandmorty.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -24,13 +26,15 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class EpisodesFragment : Fragment() {
+class EpisodesFragment : Fragment(), View.OnClickListener{
 
     private val episodesVM: EpisodesViewModel by lazyViewModel {
         App.appComponent.episodesViewModel().create(it)
     }
     private lateinit var episodesRV: RecyclerView
     private lateinit var episodesAdapter: EpisodesAdapter
+    private lateinit var errorLayout: LinearLayout
+    private lateinit var errorButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,9 @@ class EpisodesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_episode, container, false)
         episodesRV = view.findViewById(R.id.episodes_r_v)
+        errorLayout = view.findViewById(R.id.episodes_error_layout)
+        errorButton = view.findViewById(R.id.episodes_retry_button)
+        errorButton.setOnClickListener(this)
         episodesRV.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
@@ -62,6 +69,15 @@ class EpisodesFragment : Fragment() {
         setToolbarTitle(requireActivity().findViewById(R.id.toolbar), getString(R.string.episodes))
     }
 
+    override fun onClick(view: View) {
+        when (view) {
+            errorButton -> {
+                setEpisodes()
+                errorLayout.visibility = GONE
+            }
+        }
+    }
+
     private fun setEpisodes() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -72,7 +88,7 @@ class EpisodesFragment : Fragment() {
                 if (episodes.isNotEmpty()) {
                     episodesAdapter = EpisodesAdapter(episodes)
                     episodesRV.adapter = episodesAdapter
-                }
+                } else errorLayout.visibility = VISIBLE
             }
         }
     }
