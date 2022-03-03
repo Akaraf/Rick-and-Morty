@@ -5,3 +5,7 @@ object Paging {
     const val PAGE_SIZE = 20
     const val INITIAL_LOAD_SIZE = 60
 }
+
+object Character {
+    const val EXTRA_CHARACTER = "parcelable character"
+}

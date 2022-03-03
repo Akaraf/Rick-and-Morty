@@ -2,6 +2,7 @@ package com.raaf.rickandmorty.ui.adapters
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.raaf.rickandmorty.Character.EXTRA_CHARACTER
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.dataModels.Character
 
@@ -43,6 +45,7 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
             .error(ColorDrawable(Color.GRAY))
             .into(holder.characterImage)
         holder.characterName.text = character.name
+        holder.character = character
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -65,6 +68,7 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
+        var character: Character? = null
         var characterImage: ImageView = itemView.findViewById(R.id.character_i_v)
         var characterName: TextView = itemView.findViewById(R.id.character_name_t_v)
 
@@ -73,6 +77,9 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager,
         }
 
         override fun onClick(view: View) {
+            var bundle = Bundle()
+            bundle.putParcelable(EXTRA_CHARACTER, character)
+            view.findNavController().navigate(R.id.action_global_characterDetailFragment, bundle)
         }
     }
 

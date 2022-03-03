@@ -18,12 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.raaf.rickandmorty.App
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.ui.adapters.CharactersAdapter
-import com.raaf.rickandmorty.ui.adapters.CharactersLoadStateAdapter
+import com.raaf.rickandmorty.ui.adapters.CharactersLoaderStateAdapter
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
 import com.raaf.rickandmorty.viewModels.CharactersViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment(), View.OnClickListener {
@@ -31,7 +29,6 @@ class CharactersFragment : Fragment(), View.OnClickListener {
     val charactersVM: CharactersViewModel by lazyViewModel {
         App.appComponent.charactersViewModel().create(it)
     }
-    private var charactersJob: Job? = null
 
     private lateinit var charactersRV: RecyclerView
     private lateinit var characterLM: GridLayoutManager
@@ -101,8 +98,8 @@ class CharactersFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addLoadStateAdapters() {
-        var headerStateAdapter = CharactersLoadStateAdapter { charactersAdapter.retry() }
-        var footerStateAdapter = CharactersLoadStateAdapter { charactersAdapter.retry() }
+        var headerStateAdapter = CharactersLoaderStateAdapter { charactersAdapter.retry() }
+        var footerStateAdapter = CharactersLoaderStateAdapter { charactersAdapter.retry() }
             charactersRV.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
                 headerStateAdapter,
                 footerStateAdapter

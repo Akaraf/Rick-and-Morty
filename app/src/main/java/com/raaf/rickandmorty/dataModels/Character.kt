@@ -1,7 +1,10 @@
 package com.raaf.rickandmorty.dataModels
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Character(
     val id: Int,
     val name: String,
@@ -11,4 +14,4 @@ data class Character(
     @SerializedName("episode")
     val episodes: List<String>,
     val image: String
-)
+) : Parcelable

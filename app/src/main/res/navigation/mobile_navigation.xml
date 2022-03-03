@@ -8,4 +8,8 @@
         android:id="@+id/charactersFragment"
         android:name="com.raaf.rickandmorty.ui.CharactersFragment"
         android:label="" />
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.raaf.rickandmorty.ui.CharacterDetailFragment"
+        android:label="CharacterDetailFragment" /><action android:id="@+id/action_global_characterDetailFragment" app:destination="@id/characterDetailFragment"/>
 </navigation>

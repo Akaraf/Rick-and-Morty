@@ -2,6 +2,7 @@ package com.raaf.rickandmorty.di.components
 
 import com.raaf.rickandmorty.di.modules.ApiServiceModule
 import com.raaf.rickandmorty.di.modules.CharactersPagingSourceModule
+import com.raaf.rickandmorty.viewModels.CharacterDetailViewModel
 import com.raaf.rickandmorty.viewModels.CharactersViewModel
 import dagger.BindsInstance
 import dagger.Component
@@ -19,4 +20,5 @@ interface AppComponent {
     }
 
     fun charactersViewModel() : CharactersViewModel.Factory
+    fun characterDetailViewModel() : CharacterDetailViewModel.Factory
 }
