@@ -20,6 +20,7 @@ import com.raaf.rickandmorty.ui.adapters.EpisodesAdapter
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
 import com.raaf.rickandmorty.ui.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.EpisodesViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -35,6 +36,11 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
     private lateinit var episodesAdapter: EpisodesAdapter
     private lateinit var errorLayout: LinearLayout
     private lateinit var errorButton: Button
+
+    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+        throwable.printStackTrace()
+        errorLayout.visibility = VISIBLE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +85,7 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
     }
 
     private fun setEpisodes() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(coroutineExceptionHandler) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 val episodes = withContext(Dispatchers.IO) {
                     if (!episodesVM.isOnlyOneEpisode) episodesVM.getEpisodes()
