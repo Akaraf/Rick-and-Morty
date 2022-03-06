@@ -11,14 +11,13 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.raaf.rickandmorty.Character.EXTRA_CHARACTER
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.dataModels.Character
 
-class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDataAdapter<Character,
+class CharactersAdapter : PagingDataAdapter<Character,
         CharactersAdapter.CharactersViewHolder>(ReviewDiffItemCallback) {
 
     companion object {
@@ -32,7 +31,7 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDat
             .inflate(R.layout.card_character, parent, false))
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        var character = getItem(position)
+        val character = getItem(position)
         if (character == null) return
         Glide.with(holder.itemView)
             .load(character.image)
@@ -40,7 +39,6 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDat
             .into(holder.characterImage)
         holder.characterName.text = character.name
         holder.character = character
-        holder.layoutManager = layoutManager
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -51,7 +49,6 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDat
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
-        var layoutManager: GridLayoutManager? = null
         var character: Character? = null
         var characterImage: ImageView = itemView.findViewById(R.id.character_i_v)
         var characterName: TextView = itemView.findViewById(R.id.character_name_t_v)
@@ -61,7 +58,7 @@ class CharactersAdapter(private val layoutManager: GridLayoutManager): PagingDat
         }
 
         override fun onClick(view: View) {
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putParcelable(EXTRA_CHARACTER, character)
             view.findNavController().navigate(R.id.action_global_characterDetailFragment, bundle)
         }

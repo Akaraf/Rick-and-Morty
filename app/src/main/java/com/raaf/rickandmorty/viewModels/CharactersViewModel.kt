@@ -6,12 +6,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.raaf.rickandmorty.Paging
 import com.raaf.rickandmorty.data.CharactersPagingSource
-import com.raaf.rickandmorty.ui.adapters.CharactersAdapter
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class CharactersViewModel @AssistedInject constructor(
     private val pagingSource: CharactersPagingSource,

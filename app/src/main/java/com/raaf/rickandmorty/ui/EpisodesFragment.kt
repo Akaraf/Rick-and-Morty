@@ -104,7 +104,7 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
     }
 
     private fun changeLoadStateLayout(loadState: Int) {
-        when(loadState) {
+        when (loadState) {
             //Loading
             0 -> {
                 loadStateIncludeLayout.visibility = VISIBLE

@@ -19,7 +19,6 @@ import com.raaf.rickandmorty.ui.adapters.LoaderStateAdapter
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
 import com.raaf.rickandmorty.ui.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.CharactersViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -49,7 +48,7 @@ class CharactersFragment : Fragment(), View.OnClickListener {
             requireContext(), 2,
             RecyclerView.VERTICAL, false)
         charactersRV.layoutManager = characterLM
-        charactersAdapter = CharactersAdapter(characterLM)
+        charactersAdapter = CharactersAdapter()
         loadStateIncludeLayout = view.findViewById(R.id.characters_load_state_include_layout)
         startProgressBar = loadStateIncludeLayout.findViewById(R.id.reviews_load_progress_bar)
         errorLayout = loadStateIncludeLayout.findViewById(R.id.error_layout)
