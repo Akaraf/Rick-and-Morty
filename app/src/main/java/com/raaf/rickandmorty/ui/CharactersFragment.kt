@@ -99,8 +99,8 @@ class CharactersFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addLoadStateAdapters() {
-        var headerStateAdapter = LoaderStateAdapter { charactersAdapter.retry() }
-        var footerStateAdapter = LoaderStateAdapter { charactersAdapter.retry() }
+        val headerStateAdapter = LoaderStateAdapter { charactersAdapter.retry() }
+        val footerStateAdapter = LoaderStateAdapter { charactersAdapter.retry() }
             charactersRV.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
                 headerStateAdapter,
                 footerStateAdapter

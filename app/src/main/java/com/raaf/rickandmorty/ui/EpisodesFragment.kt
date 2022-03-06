@@ -22,8 +22,6 @@ import com.raaf.rickandmorty.ui.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.EpisodesViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -34,12 +32,14 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
     }
     private lateinit var episodesRV: RecyclerView
     private lateinit var episodesAdapter: EpisodesAdapter
+    private lateinit var loadStateIncludeLayout : FrameLayout
+    private lateinit var startProgressBar: ProgressBar
     private lateinit var errorLayout: LinearLayout
-    private lateinit var errorButton: Button
+    private lateinit var retryButton: Button
 
     val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
         throwable.printStackTrace()
-        errorLayout.visibility = VISIBLE
+        changeLoadStateLayout(2)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +52,13 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_episode, container, false)
+        val view = inflater.inflate(R.layout.fragment_episodes, container, false)
         episodesRV = view.findViewById(R.id.episodes_r_v)
-        errorLayout = view.findViewById(R.id.episodes_error_layout)
-        errorButton = view.findViewById(R.id.episodes_retry_button)
-        errorButton.setOnClickListener(this)
+        loadStateIncludeLayout = view.findViewById(R.id.episodes_load_state_include_layout)
+        startProgressBar = loadStateIncludeLayout.findViewById(R.id.reviews_load_progress_bar)
+        errorLayout = loadStateIncludeLayout.findViewById(R.id.error_layout)
+        retryButton = loadStateIncludeLayout.findViewById(R.id.retry_button)
+        retryButton.setOnClickListener(this)
         episodesRV.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
@@ -68,6 +70,7 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setEpisodes()
+        changeLoadStateLayout(0)
     }
 
     override fun onResume() {
@@ -77,9 +80,9 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
 
     override fun onClick(view: View) {
         when (view) {
-            errorButton -> {
+            retryButton -> {
                 setEpisodes()
-                errorLayout.visibility = GONE
+                changeLoadStateLayout(0)
             }
         }
     }
@@ -94,7 +97,29 @@ class EpisodesFragment : Fragment(), View.OnClickListener{
                 if (episodes.isNotEmpty()) {
                     episodesAdapter = EpisodesAdapter(episodes)
                     episodesRV.adapter = episodesAdapter
-                } else errorLayout.visibility = VISIBLE
+                    changeLoadStateLayout(1)
+                } else changeLoadStateLayout(2)
+            }
+        }
+    }
+
+    private fun changeLoadStateLayout(loadState: Int) {
+        when(loadState) {
+            //Loading
+            0 -> {
+                loadStateIncludeLayout.visibility = VISIBLE
+                startProgressBar.visibility = VISIBLE
+                errorLayout.visibility = GONE
+            }
+            //Loaded
+            1 -> {
+                loadStateIncludeLayout.visibility = GONE
+            }
+            //Load error
+            2 -> {
+                loadStateIncludeLayout.visibility = VISIBLE
+                startProgressBar.visibility = GONE
+                errorLayout.visibility = VISIBLE
             }
         }
     }
