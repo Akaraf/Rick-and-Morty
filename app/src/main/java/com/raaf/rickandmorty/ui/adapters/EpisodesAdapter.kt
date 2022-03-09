@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDivider
 import com.raaf.rickandmorty.R
-import com.raaf.rickandmorty.dataModels.Episode
+import com.raaf.rickandmorty.data.dataModels.Episode
 
 class EpisodesAdapter(private val episodes: List<Episode>)
     : RecyclerView.Adapter<EpisodesAdapter.EpisodeViewHolder>() {

@@ -17,9 +17,9 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.imageview.ShapeableImageView
 import com.raaf.rickandmorty.App
 import com.raaf.rickandmorty.R
-import com.raaf.rickandmorty.dataModels.Character
+import com.raaf.rickandmorty.data.dataModels.Character
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
-import com.raaf.rickandmorty.ui.utils.setToolbarTitle
+import com.raaf.rickandmorty.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.CharacterDetailViewModel
 
 class CharacterDetailFragment : Fragment(), View.OnClickListener {

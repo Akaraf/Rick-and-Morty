@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.raaf.rickandmorty.Paging
 import com.raaf.rickandmorty.data.webApi.ApiService
-import com.raaf.rickandmorty.dataModels.Character
+import com.raaf.rickandmorty.data.dataModels.Character
 import java.lang.Exception
 import javax.inject.Inject
 

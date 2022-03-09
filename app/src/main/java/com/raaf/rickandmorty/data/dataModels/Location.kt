@@ -1,4 +1,4 @@
-package com.raaf.rickandmorty.dataModels
+package com.raaf.rickandmorty.data.dataModels
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

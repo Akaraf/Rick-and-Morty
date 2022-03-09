@@ -1,8 +1,7 @@
 package com.raaf.rickandmorty.data.webApi
 
 import com.raaf.rickandmorty.data.webApi.responseModels.CharactersResponse
-import com.raaf.rickandmorty.dataModels.Character
-import com.raaf.rickandmorty.dataModels.Episode
+import com.raaf.rickandmorty.data.dataModels.Episode
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

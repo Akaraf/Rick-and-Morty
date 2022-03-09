@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.raaf.rickandmorty.Character.EXTRA_CHARACTER
 import com.raaf.rickandmorty.R
-import com.raaf.rickandmorty.dataModels.Character
+import com.raaf.rickandmorty.data.dataModels.Character
 
 class CharactersAdapter : PagingDataAdapter<Character,
         CharactersAdapter.CharactersViewHolder>(ReviewDiffItemCallback) {

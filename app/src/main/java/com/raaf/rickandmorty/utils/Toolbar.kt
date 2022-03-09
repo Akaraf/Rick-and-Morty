@@ -1,4 +1,4 @@
-package com.raaf.rickandmorty.ui.utils
+package com.raaf.rickandmorty.utils
 
 import android.view.View
 import androidx.appcompat.widget.Toolbar

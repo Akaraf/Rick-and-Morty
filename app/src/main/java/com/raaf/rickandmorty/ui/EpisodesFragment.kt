@@ -18,7 +18,7 @@ import com.raaf.rickandmorty.App
 import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.ui.adapters.EpisodesAdapter
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
-import com.raaf.rickandmorty.ui.utils.setToolbarTitle
+import com.raaf.rickandmorty.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.EpisodesViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

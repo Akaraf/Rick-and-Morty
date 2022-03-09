@@ -17,7 +17,7 @@ import com.raaf.rickandmorty.R
 import com.raaf.rickandmorty.ui.adapters.CharactersAdapter
 import com.raaf.rickandmorty.ui.adapters.LoaderStateAdapter
 import com.raaf.rickandmorty.ui.extensions.lazyViewModel
-import com.raaf.rickandmorty.ui.utils.setToolbarTitle
+import com.raaf.rickandmorty.utils.setToolbarTitle
 import com.raaf.rickandmorty.viewModels.CharactersViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

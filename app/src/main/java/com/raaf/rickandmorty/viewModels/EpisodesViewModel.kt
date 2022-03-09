@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.raaf.rickandmorty.Episodes.EXTRA_EPISODES_ID
 import com.raaf.rickandmorty.data.webApi.ApiService
-import com.raaf.rickandmorty.dataModels.Episode
+import com.raaf.rickandmorty.data.dataModels.Episode
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
