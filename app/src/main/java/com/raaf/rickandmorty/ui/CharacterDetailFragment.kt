@@ -93,6 +93,7 @@ class CharacterDetailFragment : Fragment(), View.OnClickListener {
         }
         Glide.with(requireContext())
             .load(character.image)
+            .placeholder(ColorDrawable(Color.LTGRAY))
             .error(ColorDrawable(Color.GRAY))
             .into(characterIV)
         characterNameTV.text = character.name
