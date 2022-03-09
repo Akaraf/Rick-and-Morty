@@ -31,10 +31,10 @@ class CharactersAdapter : PagingDataAdapter<Character,
             .inflate(R.layout.card_character, parent, false))
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        val character = getItem(position)
-        if (character == null) return
+        val character = getItem(position) ?: return
         Glide.with(holder.itemView)
             .load(character.image)
+            .placeholder(ColorDrawable(Color.LTGRAY))
             .error(ColorDrawable(Color.GRAY))
             .into(holder.characterImage)
         holder.characterName.text = character.name
