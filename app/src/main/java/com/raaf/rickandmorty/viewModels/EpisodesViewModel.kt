@@ -16,7 +16,7 @@ class EpisodesViewModel @AssistedInject constructor(
     @Assisted savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    var episodesIdString: String = ""
+    private var episodesIdString: String = ""
     var isOnlyOneEpisode = false
         private set
 
